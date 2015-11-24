@@ -1,0 +1,38 @@
+{
+  "name": "posthtml-collect-inline-styles",
+  "description": "PostHTML plugin that collect inline styles and insert to <head>",
+  "version": "0.0.1",
+  "author": {
+    "name": "nju33",
+    "email": "sski0155+npm@gmail.com",
+    "url": "http://nju33.work/"
+  },
+  "bugs": {
+    "url": "https://github.com/totora0155/posthtml-collect-inline-styles/issues"
+  },
+  "dependencies": {
+    "posthtml": "^0.8.0"
+  },
+  "devDependencies": {
+    "chai": "^3.4.0",
+    "coffee-script": "^1.10.0",
+    "mocha": "^2.3.3"
+  },
+  "homepage": "https://github.com/totora0155/posthtml-collect-inlinestyles#readme",
+  "keywords": [
+    "html",
+    "posthtml",
+    "posthtml-plugin"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:totora0155/posthtml-collect-inline-styles.git"
+  },
+  "scripts": {
+    "build": "coffee -o ./ -c src/index.coffee",
+    "test": " mocha --compilers \"--compilers coffee:coffee-script/register\"  test/*",
+    "watch": "coffee -w -o ./ -c src/index.coffee"
+  }
+}
