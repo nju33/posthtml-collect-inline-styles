@@ -8,9 +8,9 @@ posthtml     = require 'posthtml'
 collectInlineStyles = require '..'
 
 describe 'posthtml-collect-inline-styles', ->
-  it 'expect', ->
-    before = fs.readFileSync './test/cases/test/before.html', 'utf-8'
-    after = fs.readFileSync './test/cases/test/after.html', 'utf-8'
+  it 'has class', ->
+    before = fs.readFileSync './test/cases/has-class/before.html', 'utf-8'
+    after = fs.readFileSync './test/cases/has-class/after.html', 'utf-8'
 
     posthtml()
       .use collectInlineStyles

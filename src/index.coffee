@@ -1,5 +1,5 @@
 collectWalker = do ->
-  css = []
+  attrs = []
   (root) ->
     return if not root.tag?
 
@@ -8,14 +8,14 @@ collectWalker = do ->
         class: '.' + root.attrs.class
         style: root.attrs.style
 
-      css.push attr
+      attrs.push attr
       root.attrs.style = false
 
     if root.content?
       for node in root.content
         collectWalker node
 
-    css
+    attrs
 
 collectInlineStyles = (tree) ->
   attrs = null
@@ -28,12 +28,22 @@ collectInlineStyles = (tree) ->
       tag = 'style'
       content = ["\n"]
       for attr in attrs
-        dcrl = [
-          attr.class + " {\n"
-          '  ' + attr.style + "\n"
-          "}\n"
-        ]
-        content = content.concat dcrl
+        dcrls = do ->
+          dcrls = attr.style.split(/;/)
+            .filter (dcrl) -> not /^[\n\s]*$/.test dcrl
+            .map (dcrl) ->
+              replaced = dcrl.replace /^[\n\s]*|[\n\s]*$/, ''
+              '  ' + replaced + ";\n"
+          dcrls
+        css = do ->
+          selector = [
+            attr.class + " {\n"
+            "}\n"
+          ]
+          Array::splice.apply selector, [1, 0].concat dcrls
+          selector
+
+        content = content.concat css
 
       node.content.push {tag, content}
       node.content.push "\n"

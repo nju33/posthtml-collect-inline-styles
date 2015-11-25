@@ -3,8 +3,8 @@
   var collectInlineStyles, collectWalker;
 
   collectWalker = (function() {
-    var css;
-    css = [];
+    var attrs;
+    attrs = [];
     return function(root) {
       var attr, i, len, node, ref, ref1;
       if (root.tag == null) {
@@ -15,7 +15,7 @@
           "class": '.' + root.attrs["class"],
           style: root.attrs.style
         };
-        css.push(attr);
+        attrs.push(attr);
         root.attrs.style = false;
       }
       if (root.content != null) {
@@ -25,7 +25,7 @@
           collectWalker(node);
         }
       }
-      return css;
+      return attrs;
     };
   })();
 
@@ -40,13 +40,28 @@
     }).match({
       tag: 'head'
     }, function(node) {
-      var attr, content, dcrl, i, len, tag;
+      var attr, content, css, dcrls, i, len, tag;
       tag = 'style';
       content = ["\n"];
       for (i = 0, len = attrs.length; i < len; i++) {
         attr = attrs[i];
-        dcrl = [attr["class"] + " {\n", '  ' + attr.style + "\n", "}\n"];
-        content = content.concat(dcrl);
+        dcrls = (function() {
+          dcrls = attr.style.split(/;/).filter(function(dcrl) {
+            return !/^[\n\s]*$/.test(dcrl);
+          }).map(function(dcrl) {
+            var replaced;
+            replaced = dcrl.replace(/^[\n\s]*|[\n\s]*$/, '');
+            return '  ' + replaced + ";\n";
+          });
+          return dcrls;
+        })();
+        css = (function() {
+          var selector;
+          selector = [attr["class"] + " {\n", "}\n"];
+          Array.prototype.splice.apply(selector, [1, 0].concat(dcrls));
+          return selector;
+        })();
+        content = content.concat(css);
       }
       node.content.push({
         tag: tag,
