@@ -12,7 +12,13 @@
       }
       if (((ref = root.attrs) != null ? ref.style : void 0) != null) {
         attr = {
-          "class": '.' + root.attrs["class"],
+          "class": (function() {
+            if (root.attrs["class"]) {
+              return '.' + root.attrs["class"];
+            } else {
+              return root.tag;
+            }
+          })(),
           style: root.attrs.style
         };
         attrs.push(attr);

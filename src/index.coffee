@@ -5,7 +5,11 @@ collectWalker = do ->
 
     if root.attrs?.style?
       attr =
-        class: '.' + root.attrs.class
+        class: do ->
+          if root.attrs.class
+            '.' + root.attrs.class
+          else
+            root.tag
         style: root.attrs.style
 
       attrs.push attr

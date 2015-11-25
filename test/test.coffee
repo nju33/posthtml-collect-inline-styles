@@ -12,8 +12,18 @@ describe 'posthtml-collect-inline-styles', ->
     before = fs.readFileSync './test/cases/has-class/before.html', 'utf-8'
     after = fs.readFileSync './test/cases/has-class/after.html', 'utf-8'
 
-    posthtml()
-      .use collectInlineStyles
-      .process before
-      .then (result) ->
-        expect(result.html).to.equal(after)
+    html = posthtml()
+             .use collectInlineStyles
+             .process before, {sync: true}
+             .html
+    expect(html).to.equal(after)
+
+  it 'doesnt have class',  ->
+    before = fs.readFileSync './test/cases/doesnt-have-class/before.html', 'utf-8'
+    after = fs.readFileSync './test/cases/doesnt-have-class/after.html', 'utf-8'
+
+    html = posthtml()
+             .use collectInlineStyles
+             .process before, {sync: true}
+             .html
+    expect(html).to.equal(after)
