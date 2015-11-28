@@ -17,10 +17,9 @@
   };
 
   collectWalker = (function() {
-    var attrs, closest, currentLayer;
+    var attrs, closest;
     attrs = [];
     closest = null;
-    currentLayer = null;
     return function(root, closest) {
       var attr, i, len, node, ref, ref1, ref2;
       if (root.tag == null) {

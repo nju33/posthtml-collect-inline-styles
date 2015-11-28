@@ -12,7 +12,6 @@ getSelector = (tagname, closest) ->
 collectWalker = do ->
   attrs = []
   closest = null
-  currentLayer = null
   (root, closest) ->
     return if not root.tag?
 
