@@ -11,7 +11,6 @@ getSelector = (tagname, closest) ->
 
 collectWalker = do ->
   attrs = []
-  closest = null
   (root, closest) ->
     return if not root.tag?
 
@@ -27,15 +26,17 @@ collectWalker = do ->
       attrs.push attr
       root.attrs.style = false
 
-    if root.attrs?.class?
-      closest =
-        class: getClass root.attrs.class
-        count: 0
-    else if closest?
-      closest.count++
 
     if root.content?
+
       for node in root.content
+        if root.attrs?.class?
+          closest =
+            class: getClass root.attrs.class
+            count: 0
+        else if closest?
+          closest.count++
+
         collectWalker node, closest
 
     attrs

@@ -17,9 +17,8 @@
   };
 
   collectWalker = (function() {
-    var attrs, closest;
+    var attrs;
     attrs = [];
-    closest = null;
     return function(root, closest) {
       var attr, i, len, node, ref, ref1, ref2;
       if (root.tag == null) {
@@ -39,18 +38,18 @@
         attrs.push(attr);
         root.attrs.style = false;
       }
-      if (((ref1 = root.attrs) != null ? ref1["class"] : void 0) != null) {
-        closest = {
-          "class": getClass(root.attrs["class"]),
-          count: 0
-        };
-      } else if (closest != null) {
-        closest.count++;
-      }
       if (root.content != null) {
-        ref2 = root.content;
-        for (i = 0, len = ref2.length; i < len; i++) {
-          node = ref2[i];
+        ref1 = root.content;
+        for (i = 0, len = ref1.length; i < len; i++) {
+          node = ref1[i];
+          if (((ref2 = root.attrs) != null ? ref2["class"] : void 0) != null) {
+            closest = {
+              "class": getClass(root.attrs["class"]),
+              count: 0
+            };
+          } else if (closest != null) {
+            closest.count++;
+          }
           collectWalker(node, closest);
         }
       }
