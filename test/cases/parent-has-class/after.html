@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Test</title>
+<style>
+.closest__class span {
+  color: orange;
+}
+.parent__class > span {
+  color: orange;
+}
+.third__class span {
+  color: orange;
+}
+.third__class p {
+  margin-top: 5px;
+}
+.first__class > hr {
+  border-top: 1px solid orange;
+}
+</style>
+</head>
+<body>
+
+  <div class="closest__class">
+    <p>
+      <span></span>
+    </p>
+  </div>
+
+  <div>
+    <p class="parent__class">
+      <span></span>
+    </p>
+  </div>
+
+  <div>
+    <div class="first__class">
+      <div class="second__class">
+        <div class="third__class">
+          <p>
+            <span></span>
+          </p>
+          <p></p>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </div>
+
+</body>
+</html>
