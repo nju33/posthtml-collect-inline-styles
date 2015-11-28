@@ -14,7 +14,7 @@
         attr = {
           "class": (function() {
             if (root.attrs["class"]) {
-              return '.' + root.attrs["class"];
+              return '.' + root.attrs["class"].split(/\s/)[0];
             } else {
               return root.tag;
             }

@@ -7,7 +7,7 @@ collectWalker = do ->
       attr =
         class: do ->
           if root.attrs.class
-            '.' + root.attrs.class
+            '.' + root.attrs.class.split(/\s/)[0]
           else
             root.tag
         style: root.attrs.style
