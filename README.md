@@ -1,5 +1,7 @@
 # posthtml-collect-inline-styles
 
+[![npm version](https://badge.fury.io/js/posthtml-collect-inline-styles.svg)](https://badge.fury.io/js/posthtml-collect-inline-styles)
+
 [PostHTML](https://github.com/posthtml/posthtml) plugin that collect inline styles and insert to `<head>`
 
 ## Install
